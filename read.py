@@ -4,18 +4,16 @@ import time
 import os
 
 # Configure Serial port
-arduino_port = "COM8"  # Replace with your port
+arduino_port = "COM8"  
 baud_rate = 9600
 output_file = os.path.join(os.path.dirname(os.path.abspath(r"C:\Users\SWAPNIL JAIN\Desktop\dataset\testing.csv")), "testing.csv")
 
 # Open Serial connection
 ser = serial.Serial(arduino_port, baud_rate)
-time.sleep(2)  # Wait for connection to stabilize
+time.sleep(2)  
 
-# Check if the file already exists
 file_exists = os.path.exists(output_file)
 
-# Open CSV file in append mode
 with open(output_file, mode='a', newline='') as file:
     writer = csv.writer(file)
     
@@ -26,16 +24,16 @@ with open(output_file, mode='a', newline='') as file:
     try:
         while True:
             # Read line from Serial
-            line = ser.readline().decode('utf-8').strip()  # Decode the byte data and strip any extra spaces/newlines
+            line = ser.readline().decode('utf-8').strip()  
             print("Raw Data:", line)  # Print the raw data
             
             # Extract data
             if "Pitch:" in line and "Roll:" in line:
-                # Extract pitch and roll values from the line
+               
                 parts = line.split(", ")
                 try:
-                    pitch = float(parts[0].split(":")[1].strip())  # Extract pitch value
-                    roll = float(parts[1].split(":")[1].strip())   # Extract roll value
+                    pitch = float(parts[0].split(":")[1].strip()) 
+                    roll = float(parts[1].split(":")[1].strip())   
 
                     # Print the data being written
                     print(f"Time: {time.time()}, Pitch: {pitch}, Roll: {roll}")
