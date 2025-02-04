@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Hand, Volume2, VolumeX, RefreshCw, Info } from 'lucide-react';
+import { io } from "socket.io-client";
+
+// Connect to the WebSocket server
+const socket = io("http://localhost:5000");
 
 function App() {
   const [predictedLetter, setPredictedLetter] = useState<string>('A');
@@ -35,7 +39,7 @@ function App() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2">
             <Hand className="w-8 h-8 text-indigo-600" />
-            <h1 className="text-2xl font-bold text-gray-800">Sign Language Detector</h1>
+            <h1 className="text-2xl font-bold text-gray-800">Sign Language Recogniser</h1>
           </div>
           <button 
             onClick={() => setIsVoiceEnabled(prev => !prev)}
@@ -86,8 +90,8 @@ function App() {
             <div>
               <h3 className="font-medium text-gray-800 mb-1">Tips for Best Results</h3>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Keep your hand centered in the frame</li>
-                <li>• Ensure good lighting conditions</li>
+                <li>• Keep your hand  stable for a while </li>
+                <li>• Ensure   that the  glove is  worn  properly </li>
                 <li>• Hold each sign steady for 1-2 seconds</li>
                 <li>• Toggle voice assistant using the speaker icon</li>
               </ul>
