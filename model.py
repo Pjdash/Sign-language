@@ -2,9 +2,10 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
+import joblib
 
-data = pd.read_csv("normalized_dataset.csv")
-data1 = pd.read_csv("normalised_test_dataset.csv")
+data = pd.read_csv("final_dataset.csv")
+# data1 = pd.read_csv("normalised_test_dataset.csv")
 
 '''print("Dataset Preview:")
 print(data.head())'''
@@ -23,6 +24,10 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy * 100:.2f}%")
 
-# print("Classification Report:")
-# print(classification_report(y_test, y_pred))
-print(model.predict(data1))
+print("Classification Report:")
+print(classification_report(y_test, y_pred))
+# print(model.predict(data1))
+
+# Save the model
+joblib.dump(model, "random_forest_model.pkl")
+print("Model saved as random_forest_model.pkl")
